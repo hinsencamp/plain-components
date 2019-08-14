@@ -1,0 +1,18 @@
+/* doesnt work for Edge and EE */
+
+button {
+  all: unset;
+}
+
+.App {
+  background-color: #f1f1f1;
+  min-height: 100vh;
+
+  .expandable {
+    // background: blue;
+  }
+}
+
+.App-link {
+  color: #61dafb;
+}
