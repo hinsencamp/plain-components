@@ -2,7 +2,8 @@
   max-width: 500px;
   font-size: 13px;
 
-  .header, .content {
+  .header,
+  .content {
     display: flex;
     align-items: center;
 
@@ -30,19 +31,19 @@
     border-radius: 50%;
     position: absolute;
     right: calc(100% + 6px);
-    transition: transform .2s linear, box-shadow .05s ease-out;
+    transition: transform 0.2s linear, box-shadow 0.05s ease-out;
 
     &.is-open {
       transform: rotate(90deg);
     }
 
     &:hover {
-      background-color: rgba(0, 0, 0, .1);
+      background-color: rgba(0, 0, 0, 0.1);
     }
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 1px #2b7bff,0 0 0 4px #8cb7ff;
+      box-shadow: 0 0 0 1px #2b7bff, 0 0 0 4px #8cb7ff;
     }
   }
 
@@ -86,7 +87,7 @@
           left: -48px;
           top: -1px;
         }
-  
+
         &::before {
           content: "";
           position: absolute;

@@ -13,9 +13,18 @@ button::-moz-focus-inner {
 }
 
 .App {
-  background-color: #f1f1f1;
+  background-color: #fff;
   min-height: 100vh;
   padding: 2rem;
+
+  .example {
+    height: 150px;
+
+    h2 {
+      border-bottom: 1px solid red;
+      // width: 50%;
+    }
+  }
 }
 
 .App-link {
