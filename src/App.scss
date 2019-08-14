@@ -4,13 +4,18 @@ button {
   all: unset;
 }
 
+button::-moz-focus-inner {
+  border: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
 .App {
   background-color: #f1f1f1;
   min-height: 100vh;
-
-  .expandable {
-    // background: blue;
-  }
+  padding: 2rem;
 }
 
 .App-link {

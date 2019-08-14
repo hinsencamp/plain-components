@@ -5,9 +5,7 @@
   margin: 2px;
 }
 
-.content,
-.header,
-.toggle {
+.default {
   @include default;
 }
 

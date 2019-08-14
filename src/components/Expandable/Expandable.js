@@ -31,7 +31,7 @@ export default class Expandable extends React.Component {
   render() {
     const { isExpanded, ...rest } = this.props;
     return (
-      <div className={styles.expandable} {...rest}>
+      <div {...rest}>
         <ExpandableContext.Provider
           value={{
             toggleExpand: this.toggleExpand,
@@ -47,13 +47,21 @@ export default class Expandable extends React.Component {
 
 Expandable.Toggle = function Toggle(props) {
   const context = useContext(ExpandableContext);
+  const { className, ...rest } = props;
+
+  let classes = className ? className : styles.default;
+
+  if (context.isExpanded) {
+    classes += " is-open";
+  }
 
   return (
     <button
-      className={styles.toggle}
-      {...props}
+      className={classes}
+      {...rest}
       type="button"
       onClick={context.toggleExpand}
+      aria-expanded={context.isExpanded}
     >
       {props.children}
     </button>
@@ -76,7 +84,7 @@ Expandable.Content = function Content(props) {
   const context = useContext(ExpandableContext);
 
   return context.isExpanded ? (
-    <div className={styles.content} {...props}>
+    <div className={styles.default} {...props}>
       {props.children}
     </div>
   ) : null;
@@ -98,7 +106,7 @@ Expandable.Header = function Header(props) {
   // displays the title
   // hosts the trigger
   return (
-    <div className={styles.header} {...props}>
+    <div className={styles.default} {...props}>
       {props.children}
     </div>
   );
