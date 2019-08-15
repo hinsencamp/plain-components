@@ -1,0 +1,6 @@
+@import "../mixins.scss";
+
+.default {
+  @include default;
+  cursor: pointer;
+}

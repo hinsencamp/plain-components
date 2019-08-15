@@ -7,9 +7,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { createPortal } from "react-dom";
+import theme from "../../theme.module.scss";
 import styles from "./Modal.module.scss";
 
 const ModalContext = React.createContext();
+
+function getStyle(foo, className = "") {
+  return (foo ? foo : styles.default) + " " + className;
+}
 
 export default class Modal extends React.Component {
   static propTypes = {
@@ -114,17 +119,22 @@ export default class Modal extends React.Component {
 
   render() {
     const { children, className, isVisible } = this.props;
+
+    let rootClass = this.props.themed ? (theme['modal-root'] ? theme['modal-root'] : styles.root) : styles.root;
+    let contentClass = this.props.themed ? (theme['modal-content'] ? theme['modal-content'] : styles.content) : styles.content;
+
     return createPortal(
       isVisible && (
         <div
-          className={styles.root + " " + className}
+          className={rootClass + " " + className}
           ref={this.modalRef}
           role="dialog"
         >
-          <div className={styles.content}>
+          <div className={contentClass + " " + className}>
             <ModalContext.Provider
               value={{
-                addKeyHandler: this.addKeyHandler
+                addKeyHandler: this.addKeyHandler,
+                themed: this.props.themed
               }}
             >
               {children}
@@ -139,8 +149,11 @@ export default class Modal extends React.Component {
 }
 
 Modal.Header = function ModalHeader({ className, children }) {
+  const context = React.useContext(ModalContext);
+  let headerClass = context.themed ? (theme['modal-header'] ? theme['modal-header'] : styles.default) : styles.default;
+  
   return (
-    <header className={className ? className : styles.default}>
+    <header className={headerClass + " " + className}>
       {children}
     </header>
   );
@@ -152,19 +165,25 @@ Modal.Header.propTypes = {
 };
 
 Modal.Body = function ModalBody({ className, children }) {
+  const context = React.useContext(ModalContext);
+  let bodyClass = context.themed ? (theme['modal-body'] ? theme['modal-body'] : styles.default) : styles.default;
+  
   return (
-    <div className={className ? className : styles.default}>{children}</div>
-  );
-};
+    <div className={bodyClass + " "  + className}>{children}</div>
+    );
+  };
+  
+  Modal.Body.propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string
+  };
+  
+  Modal.Footer = function ModalFooter({ className, children }) {
+    const context = React.useContext(ModalContext);
+    let footerClass = context.themed ? (theme['modal-footer'] ? theme['modal-footer'] : styles.default) : styles.default;
 
-Modal.Body.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string
-};
-
-Modal.Footer = function ModalFooter({ className, children }) {
   return (
-    <footer className={className ? className : styles.default}>
+    <footer className={footerClass + " " + className}>
       {children}
     </footer>
   );
@@ -174,41 +193,3 @@ Modal.Footer.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node
 };
-
-class ModalButton extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node
-  };
-
-  static contextType = ModalContext;
-
-  componentDidMount() {
-    if (this.props.isFocused) {
-      setTimeout(() => this.buttonRef.current.focus());
-    }
-  }
-
-  buttonRef = React.createRef();
-
-  handleReturnKeyPress = e => {
-    e.preventDefault();
-    this.buttonRef.current.click();
-  };
-
-  render() {
-    const { className, isFocused, ...props } = this.props;
-
-    return (
-      <button
-        ref={this.buttonRef}
-        className={className ? className : styles.default + " " + styles.button}
-        {...props}
-      >
-        {this.props.children}
-      </button>
-    );
-  }
-}
-
-Modal.Button = ModalButton;
