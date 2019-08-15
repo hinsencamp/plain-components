@@ -1,5 +1,9 @@
 /* doesnt work for Edge and EE */
 
+.foo {
+  background: tomato;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -38,4 +42,8 @@ button::-moz-focus-inner {
 
 .App-link {
   color: #61dafb;
+}
+
+.NEwcamButton {
+  background: blue;
 }

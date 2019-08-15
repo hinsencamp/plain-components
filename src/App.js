@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.scss";
 
 import {
   PlainExpandable,
@@ -8,6 +7,7 @@ import {
 } from "./examples/Expandable";
 
 import Modal from "./components/Modal/Modal";
+import Button from "./components/Button";
 
 function App() {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -51,6 +51,9 @@ function App() {
           </Modal.Button>
         </Modal.Footer>
       </Modal>
+
+      <h1>Button</h1>
+      <Button className="NEwcamButton">cambutton</Button>
     </div>
   );
 }
