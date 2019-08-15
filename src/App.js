@@ -10,7 +10,10 @@ import Modal from "./components/Modal/Modal";
 import Button from "./components/Button";
 
 function App() {
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [isPlainModalVisible, setIsPlainModalVisible] = React.useState(false);
+  const [isOperateModalVisible, setIsOperateModalVisible] = React.useState(
+    false
+  );
 
   return (
     <div className="App">
@@ -31,26 +34,60 @@ function App() {
       </div>
 
       <h1>Modals</h1>
-      <button onClick={() => setIsModalVisible(true)}>Open Modal</button>
 
-      <Modal
-        isVisible={isModalVisible}
-        onClose={() => setIsModalVisible(false)}
-      >
-        <Modal.Header>
-          Header
-          <Modal.Button>&times;</Modal.Button>
-        </Modal.Header>
-        <Modal.Body>
-          <input />
-        </Modal.Body>
-        <Modal.Footer>
-          <Modal.Button>Click me</Modal.Button>
-          <Modal.Button onClick={() => setIsModalVisible(false)}>
-            Click me too
-          </Modal.Button>
-        </Modal.Footer>
-      </Modal>
+      <div className="example">
+        <h2>Plain</h2>
+        <button onClick={() => setIsPlainModalVisible(true)}>Open Modal</button>
+
+        <Modal
+          isVisible={isPlainModalVisible}
+          onClose={() => setIsPlainModalVisible(false)}
+        >
+          <Modal.Header>
+            Header
+            <Button>&times;</Button>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Body</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button>Click me</Button>
+            <Button onClick={() => setIsPlainModalVisible(false)}>
+              Click me too
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+
+      <div className="example">
+        <h2>Operate</h2>
+        <button onClick={() => setIsOperateModalVisible(true)}>
+          Open Modal
+        </button>
+
+        <Modal
+          isVisible={isOperateModalVisible}
+          onClose={() => setIsOperateModalVisible(false)}
+          themed
+        >
+          <Modal.Header>
+            <h3>Header</h3>
+            <Button className="button-icon">&times;</Button>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Body</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button className="button-secondary">Click me</Button>
+            <Button
+              className="button-primary"
+              onClick={() => setIsOperateModalVisible(false)}
+            >
+              Click me too
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
 
       <h1>Button</h1>
       <Button className="NEwcamButton">cambutton</Button>
