@@ -1,0 +1,29 @@
+@import "../mixins.scss";
+
+.root {
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .3);
+}
+
+.content {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  @include default();
+}
+
+.default {
+  @include default();
+}
+
+.button {
+  @include focus();
+}

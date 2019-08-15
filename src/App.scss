@@ -1,5 +1,14 @@
 /* doesnt work for Edge and EE */
 
+* {
+  box-sizing: border-box;
+}
+
+svg {
+  vertical-align: middle;
+  box-sizing: content-box;
+}
+
 button {
   all: unset;
 }

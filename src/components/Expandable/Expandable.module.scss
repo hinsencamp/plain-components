@@ -1,9 +1,4 @@
-@mixin default {
-  background: rgba(lightblue, 0.3);
-  border: 1px dashed black;
-  padding: 5px;
-  margin: 2px;
-}
+@import "../mixins.scss";
 
 .default {
   @include default;

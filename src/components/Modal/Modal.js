@@ -7,13 +7,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { createPortal } from "react-dom";
-import * as Styled from "./styled";
+import styles from "./Modal.module.scss";
 
 const ModalContext = React.createContext();
 
 export default class Modal extends React.Component {
   static propTypes = {
-    onModalClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
     isVisible: PropTypes.bool.isRequired,
     children: PropTypes.node,
     className: PropTypes.string
@@ -22,8 +22,8 @@ export default class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.keyHandlers = new Map([
-      [27, this.props.onModalClose],
-      [9, this.handleTabKeyDown]
+      ["Tab", this.handleTabKeyDown],
+      ["Escape", this.props.onClose]
     ]);
     this.modalRef = React.createRef();
     this.eventListenerAdded = false;
@@ -36,6 +36,7 @@ export default class Modal extends React.Component {
   }
 
   componentDidUpdate() {
+    this.setFocus();
     const { isVisible } = this.props;
     const { eventListenerAdded } = this;
 
@@ -45,6 +46,19 @@ export default class Modal extends React.Component {
       this.removeEventListner();
     }
   }
+
+  setFocus = () => {
+    const modalRef = this.modalRef.current;
+
+    if (modalRef) {
+      const defaultElement = modalRef.querySelector("input, textarea, select");
+
+      if (defaultElement) {
+        // Ugh
+        setTimeout(() => defaultElement.focus());
+      }
+    }
+  };
 
   addEventListner() {
     this.eventListenerAdded = true;
@@ -62,7 +76,7 @@ export default class Modal extends React.Component {
   }
 
   handleKeyDown = e => {
-    const keyHandler = this.keyHandlers.get(e.keyCode);
+    const keyHandler = this.keyHandlers.get(e.key);
     return keyHandler && keyHandler(e);
   };
 
@@ -96,17 +110,20 @@ export default class Modal extends React.Component {
     }
   };
 
-  addKeyHandler = (keyCode, handler) => this.keyHandlers.set(keyCode, handler);
+  addKeyHandler = (key, handler) => this.keyHandlers.set(key, handler);
 
   render() {
-    const { onModalClose, children, className, isVisible } = this.props;
+    const { children, className, isVisible } = this.props;
     return createPortal(
       isVisible && (
-        <div className={className} ref={this.modalRef} role="dialog">
-          <div>
+        <div
+          className={styles.root + " " + className}
+          ref={this.modalRef}
+          role="dialog"
+        >
+          <div className={styles.content}>
             <ModalContext.Provider
               value={{
-                onModalClose,
                 addKeyHandler: this.addKeyHandler
               }}
             >
@@ -121,8 +138,12 @@ export default class Modal extends React.Component {
   }
 }
 
-Modal.Header = function ModalHeader(props) {
-  return <header className={props.className}>{props.children}</header>;
+Modal.Header = function ModalHeader({ className, children }) {
+  return (
+    <header className={className ? className : styles.default}>
+      {children}
+    </header>
+  );
 };
 
 Modal.Header.propTypes = {
@@ -130,8 +151,10 @@ Modal.Header.propTypes = {
   className: PropTypes.string
 };
 
-Modal.Body = function ModalBody(props) {
-  return <div className={props.className}>{props.children}</div>;
+Modal.Body = function ModalBody({ className, children }) {
+  return (
+    <div className={className ? className : styles.default}>{children}</div>
+  );
 };
 
 Modal.Body.propTypes = {
@@ -139,8 +162,12 @@ Modal.Body.propTypes = {
   className: PropTypes.string
 };
 
-Modal.Footer = function ModalFooter(props) {
-  return <footer className={props.className}>{props.children}</footer>;
+Modal.Footer = function ModalFooter({ className, children }) {
+  return (
+    <footer className={className ? className : styles.default}>
+      {children}
+    </footer>
+  );
 };
 
 Modal.Footer.propTypes = {
@@ -157,8 +184,9 @@ class ModalButton extends React.Component {
   static contextType = ModalContext;
 
   componentDidMount() {
-    !this.context.disableKeyBinding &&
-      this.context.addKeyHandler(13, this.handleReturnKeyPress);
+    if (this.props.isFocused) {
+      setTimeout(() => this.buttonRef.current.focus());
+    }
   }
 
   buttonRef = React.createRef();
@@ -169,9 +197,14 @@ class ModalButton extends React.Component {
   };
 
   render() {
-    const { onModalClose, ...props } = this.props;
+    const { className, isFocused, ...props } = this.props;
+
     return (
-      <button ref={this.buttonRef} {...props}>
+      <button
+        ref={this.buttonRef}
+        className={className ? className : styles.default + " " + styles.button}
+        {...props}
+      >
         {this.props.children}
       </button>
     );
