@@ -8,5 +8,6 @@
 @mixin focus {
   &:focus {
     background: rgba(navy, 0.1);
+    outline: none;
   }
 }

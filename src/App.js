@@ -33,6 +33,13 @@ function App() {
         <OptimizeExpandable />
       </div>
 
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <h1>Modals</h1>
 
       <div className="example">
@@ -60,7 +67,7 @@ function App() {
       </div>
 
       <div className="example">
-        <h2>Operate</h2>
+        <h2>Themed</h2>
         <button onClick={() => setIsOperateModalVisible(true)}>
           Open Modal
         </button>
@@ -89,7 +96,7 @@ function App() {
         </Modal>
       </div>
       <div className="example">
-        <h2>Cawemo</h2>
+        <h2>Themed + Cawemo Styled</h2>
         <button onClick={() => setIsCawemoModalVisible(true)}>
           Open Modal
         </button>
@@ -124,10 +131,10 @@ function App() {
           </Modal.Footer>
         </Modal>
 
-        <h1>Buttons</h1>
+        {/* <h1>Buttons</h1>
         <div className="example">
           <Button>Hello World</Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
