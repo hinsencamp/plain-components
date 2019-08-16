@@ -10,12 +10,19 @@ import styles from "./Expandable.module.scss";
 
 const ExpandableContext = React.createContext();
 
+/**
+ * The `Expandable` is a UI element similiar to the accordeon, hiding content by default
+ * and expanding it upon clicking a toggle.
+ */
 export default class Expandable extends React.Component {
   static propTypes = {
+    /** The content which should be shown/hidden */
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node
     ]),
+
+    /** The initial state. */
     isExpanded: PropTypes.bool
   };
 

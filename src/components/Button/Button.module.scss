@@ -2,5 +2,6 @@
 
 .default {
   @include default;
+  @include focus;
   cursor: pointer;
 }

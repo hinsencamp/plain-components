@@ -3,10 +3,23 @@ import PropTypes from "prop-types";
 import theme from "../../theme.module.scss";
 import styles from "./Button.module.scss";
 
+/**
+ * The `Button` component allows for the easy use of well-defined buttons and
+ * can easily be themed and customized.
+ */
 export default class Button extends React.Component {
   static propTypes = {
+    /** Additional classes that should be applied to the button. */
     className: PropTypes.string,
-    children: PropTypes.node
+
+    /** The content, which can really be anything. */
+    children: PropTypes.node,
+
+    /** The button's variant. */
+    variant: PropTypes.string,
+
+    /** The button's size */
+    size: PropTypes.string
   };
 
   componentDidMount() {
@@ -23,15 +36,6 @@ export default class Button extends React.Component {
   };
 
   render() {
-    /*const classes = !classNameString
-      ? ""
-      : classNameString
-          .split(" ")
-          .map(className => {
-            return theme[className] ? theme[className] : className;
-          })
-          .join(" ");*/
-
     const { isFocused, ...props } = this.props;
     const classes = getClassNames(theme, "button");
     const appliedClasses = applyClassNames(classes, props, styles.default);

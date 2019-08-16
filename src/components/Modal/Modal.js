@@ -12,10 +12,9 @@ import styles from "./Modal.module.scss";
 
 const ModalContext = React.createContext();
 
-function getStyle(foo, className = "") {
-  return (foo ? foo : styles.default) + " " + className;
-}
-
+/**
+ * Modals are a way to show content to your user upon clicking a button or something. You'll figure it out.
+ */
 export default class Modal extends React.Component {
   static propTypes = {
     onClose: PropTypes.func.isRequired,

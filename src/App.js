@@ -6,8 +6,7 @@ import {
   OptimizeExpandable
 } from "./examples/Expandable";
 
-import Modal from "./components/Modal/Modal";
-import Button from "./components/Button";
+import { Modal, Button } from "./components";
 
 function App() {
   const [isPlainModalVisible, setIsPlainModalVisible] = React.useState(false);
@@ -73,15 +72,15 @@ function App() {
         >
           <Modal.Header>
             <h3>Header</h3>
-            <Button className="button-icon">&times;</Button>
+            <Button variant="icon">&times;</Button>
           </Modal.Header>
           <Modal.Body>
             <p>Body</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button className="button-secondary">Click me</Button>
+            <Button variant="secondary">Click me</Button>
             <Button
-              className="button-primary"
+              variant="primary"
               onClick={() => setIsOperateModalVisible(false)}
             >
               Click me too
@@ -116,7 +115,8 @@ function App() {
           </Modal.Body>
           <Modal.Footer className="cawemo-footer">
             <Button
-              className="button-primary cawemo-primary"
+              variant="primary"
+              className="cawemo-primary"
               onClick={() => setIsCawemoModalVisible(false)}
             >
               Send feedback
@@ -124,8 +124,10 @@ function App() {
           </Modal.Footer>
         </Modal>
 
-        <h1>Button</h1>
-        <Button className="NEwcamButton">cambutton</Button>
+        <h1>Buttons</h1>
+        <div className="example">
+          <Button>Hello World</Button>
+        </div>
       </div>
     </div>
   );

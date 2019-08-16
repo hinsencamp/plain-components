@@ -1,5 +1,5 @@
 import React from "react";
-import Expandable from "../components/Expandable";
+import { Expandable } from "../components";
 import "./expandable.ope.scss";
 import "./expandable.opt.scss";
 

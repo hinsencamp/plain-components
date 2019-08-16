@@ -1,0 +1,9 @@
+```js
+<Expandable>
+  <Expandable.Header>
+    <Expandable.Toggle>Toggle</Expandable.Toggle>
+    Heading
+  </Expandable.Header>
+  <Expandable.Content>Content</Expandable.Content>
+</Expandable>
+```
