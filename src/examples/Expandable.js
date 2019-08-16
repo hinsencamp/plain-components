@@ -70,7 +70,7 @@ export function OptimizeExpandable() {
           <ul className="entryList">
             <li className="listItem">
               <a className="info">
-                <span class="icon">
+                <span className="icon">
                   <svg width="28" height="20" viewBox="0 0 28 20">
                     <g fill="none">
                       <path

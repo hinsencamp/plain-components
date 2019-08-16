@@ -120,8 +120,16 @@ export default class Modal extends React.Component {
   render() {
     const { children, className, isVisible } = this.props;
 
-    let rootClass = this.props.themed ? (theme['modal-root'] ? theme['modal-root'] : styles.root) : styles.root;
-    let contentClass = this.props.themed ? (theme['modal-content'] ? theme['modal-content'] : styles.content) : styles.content;
+    let rootClass = this.props.themed
+      ? theme["modal-root"]
+        ? theme["modal-root"]
+        : styles.root
+      : styles.root;
+    let contentClass = this.props.themed
+      ? theme["modal-content"]
+        ? theme["modal-content"]
+        : styles.content
+      : styles.content;
 
     return createPortal(
       isVisible && (
@@ -150,13 +158,13 @@ export default class Modal extends React.Component {
 
 Modal.Header = function ModalHeader({ className, children }) {
   const context = React.useContext(ModalContext);
-  let headerClass = context.themed ? (theme['modal-header'] ? theme['modal-header'] : styles.default) : styles.default;
-  
-  return (
-    <header className={headerClass + " " + className}>
-      {children}
-    </header>
-  );
+  let headerClass = context.themed
+    ? theme["modal-header"]
+      ? theme["modal-header"]
+      : styles.default
+    : styles.default;
+
+  return <header className={headerClass + " " + className}>{children}</header>;
 };
 
 Modal.Header.propTypes = {
@@ -166,27 +174,29 @@ Modal.Header.propTypes = {
 
 Modal.Body = function ModalBody({ className, children }) {
   const context = React.useContext(ModalContext);
-  let bodyClass = context.themed ? (theme['modal-body'] ? theme['modal-body'] : styles.default) : styles.default;
-  
-  return (
-    <div className={bodyClass + " "  + className}>{children}</div>
-    );
-  };
-  
-  Modal.Body.propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string
-  };
-  
-  Modal.Footer = function ModalFooter({ className, children }) {
-    const context = React.useContext(ModalContext);
-    let footerClass = context.themed ? (theme['modal-footer'] ? theme['modal-footer'] : styles.default) : styles.default;
+  let bodyClass = context.themed
+    ? theme["modal-body"]
+      ? theme["modal-body"]
+      : styles.default
+    : styles.default;
 
-  return (
-    <footer className={footerClass + " " + className}>
-      {children}
-    </footer>
-  );
+  return <div className={bodyClass + " " + className}>{children}</div>;
+};
+
+Modal.Body.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string
+};
+
+Modal.Footer = function ModalFooter({ className, children }) {
+  const context = React.useContext(ModalContext);
+  let footerClass = context.themed
+    ? theme["modal-footer"]
+      ? theme["modal-footer"]
+      : styles.default
+    : styles.default;
+
+  return <footer className={footerClass + " " + className}>{children}</footer>;
 };
 
 Modal.Footer.propTypes = {

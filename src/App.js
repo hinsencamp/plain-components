@@ -14,6 +14,7 @@ function App() {
   const [isOperateModalVisible, setIsOperateModalVisible] = React.useState(
     false
   );
+  const [isCawemoModalVisible, setIsCawemoModalVisible] = React.useState(false);
 
   return (
     <div className="App">
@@ -88,9 +89,44 @@ function App() {
           </Modal.Footer>
         </Modal>
       </div>
+      <div className="example">
+        <h2>Cawemo</h2>
+        <button onClick={() => setIsCawemoModalVisible(true)}>
+          Open Modal
+        </button>
+        <Modal
+          isVisible={isCawemoModalVisible}
+          onClose={() => setIsCawemoModalVisible(false)}
+          themed
+          className="cawemo-root"
+        >
+          <Modal.Header className="cawemo-header">
+            <h3>Feedback & Support</h3>
+            <p>
+              Do you have any issues, questions or other matters and want to get
+              in touch with us?
+            </p>
+          </Modal.Header>
+          <Modal.Body className="cawemo-body">
+            <textarea
+              rows={6}
+              className="cawemo-textarea"
+              placeholder="Please write your message here. Enter at least 10 characters"
+            />
+          </Modal.Body>
+          <Modal.Footer className="cawemo-footer">
+            <Button
+              className="button-primary cawemo-primary"
+              onClick={() => setIsCawemoModalVisible(false)}
+            >
+              Send feedback
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
-      <h1>Button</h1>
-      <Button className="NEwcamButton">cambutton</Button>
+        <h1>Button</h1>
+        <Button className="NEwcamButton">cambutton</Button>
+      </div>
     </div>
   );
 }

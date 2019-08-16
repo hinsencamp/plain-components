@@ -23,12 +23,21 @@ export default class Button extends React.Component {
   };
 
   render() {
-    const { className, isFocused, ...props } = this.props;
+    const { className: classNameString, isFocused, ...props } = this.props;
+
+    const classes = !classNameString
+      ? ""
+      : classNameString
+          .split(" ")
+          .map(className => {
+            return theme[className] ? theme[className] : className;
+          })
+          .join(" ");
 
     return (
       <button
         ref={this.buttonRef}
-        className={theme[className] ? theme[className] : styles.default}
+        className={classes === "" ? styles.default : classes}
         {...props}
       >
         {this.props.children}
